@@ -5,14 +5,15 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-const esLintPlugin = (isDev) => (isDev ? [] : [new ESLintPlugin({ extensions: ["ts", "js"] })]);
-module.exports = ({ development }) => ({
-  mode: development ? "development" : "production",
-  devtool: development ? "inline-source-map" : false,
+module.exports = {
   entry: "./src/index.tsx",
+  output: {
+    path: path.join(__dirname, "/dist"),
+    filename: "bundle.js",
+  },
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 3000,
+    port: 3001,
     historyApiFallback: true,
   },
   module: {
@@ -54,17 +55,11 @@ module.exports = ({ development }) => ({
     extensions: [".tsx", ".ts", ".js"],
   },
   plugins: [
-    ...esLintPlugin(development),
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
-    new HtmlWebpackPlugin({ template: "./index.html", favicon: "./favicon.ico" }),
-    new CopyPlugin({
-      patterns: [{ from: "public", to: "public" }, { from: "public/audio", to: "public/audio" }],
-    }),
+    new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    // new CopyPlugin({
+    //   patterns: [{ from: "public", to: "public" }],
+    // }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
   ],
-  output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
-  },
-});
+};
