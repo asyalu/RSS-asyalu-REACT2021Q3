@@ -1,13 +1,19 @@
-import React from "react";
+import React from 'react';
+import { cards } from '../hardCodeData';
+import '../styles/App.scss';
+import Card from './Card';
+import SearchBar from './SearchBar';
 
-import "../styles/App.css";
-
-const App = (): JSX.Element => {
-  return (
-    <div>
-      <h1>123</h1>
+const App = (): JSX.Element => (
+  <main className="main">
+    <SearchBar />
+    <div className="main__cards-wrapper">
+      {cards.map((el) => (
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <Card {...el} />
+      ))}
     </div>
-  );
-};
+  </main>
+);
 
 export default App;
