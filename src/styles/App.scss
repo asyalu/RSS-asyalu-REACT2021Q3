@@ -6,20 +6,47 @@
 
 .main {
   width: 100%;
-  height: 98vh;
+  height: 97vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
   &__form {
-    height: 35%;
+    width: fit-content;
+    height: fit-content;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-around;
     border: 2px solid black;
     padding: 10px;
+  }
+
+  &__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__articles {
+    width: fit-content;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__label-search,
+  &__label-sort {
+    display: flex;
+    margin: 1%;
+    width: 220px;
+    justify-content: center;
+  }
+
+  &__sort-select {
+    margin-left: 5px;
   }
 
   &__form-input,
@@ -42,6 +69,36 @@
     cursor: pointer;
   }
 
+  &__pagination {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button_pagination {
+    width: 70px;
+    height: 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    margin: 1%;
+    cursor: pointer;
+  }
+
+  &__button_search {
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
   &__cards-wrapper {
     width: 80%;
     height: 30%;
@@ -52,18 +109,30 @@
   }
 
   &__card {
-    width: 200px;
-    height: 250px;
+    width: 25%;
+    height: 350px;
     border: 2px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     margin: 1%;
+    padding: 1%;
+  }
+
+  &__card-item {
+    margin: 0;
   }
 
   &__erros_agree {
     color: red;
+  }
+
+  &__card-img {
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+    object-position: top;
   }
 
   &__toggle-wrapper {

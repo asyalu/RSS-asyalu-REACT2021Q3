@@ -17,7 +17,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "react-hooks"],
+  "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
   "rules": {
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
@@ -41,6 +41,7 @@
     "max-len": ["warn", { "code": 120 }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "prettier/prettier": ["error", { "singleQuote": true, "parser": "typescript", "trailingComma": "all" }],
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "jsx-a11y/label-has-associated-control": [
