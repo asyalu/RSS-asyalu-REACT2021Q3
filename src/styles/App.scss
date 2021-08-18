@@ -90,6 +90,10 @@
     border: none;
     margin: 1%;
     cursor: pointer;
+
+    &:disabled {
+      background-color: gray;
+    }
   }
 
   &__button_search {

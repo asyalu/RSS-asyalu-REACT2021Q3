@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import shortid from 'shortid';
 import Card from './Card';
 
-const API_KEY = 'ce28e11caac3465882309f34a0bf3122';
+const API_KEY = 'd633c6052102420fa0cf577e590ad411';
 
 const Page = (): JSX.Element => {
   const [searchValue, setSearchValue] = useState('');
@@ -13,9 +13,10 @@ const Page = (): JSX.Element => {
   const [sort, setSort] = useState('publishedAt');
   const [lang, setLang] = useState('en');
   const [page, setPage] = useState(1);
+  const maxPage = 17;
 
-  const handleSubmit = async (event): Promise<void> => {
-    event.preventDefault();
+  const handleSubmit = async (event?): Promise<void> => {
+    if (event) event.preventDefault();
     setIsLoading(true);
     try {
       const response = await axios.get(
@@ -28,6 +29,10 @@ const Page = (): JSX.Element => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    handleSubmit();
+  }, [page]);
 
   return (
     <div className="main__content">
@@ -45,6 +50,7 @@ const Page = (): JSX.Element => {
             className="main__button_search"
             type="submit"
             disabled={isLoading}
+            onClick={() => setPage(1)}
           >
             Search
           </button>
@@ -94,9 +100,8 @@ const Page = (): JSX.Element => {
               className="main__button_pagination"
               type="button"
               disabled={page === 1 || isLoading}
-              onClick={(event) => {
+              onClick={() => {
                 setPage(page - 1);
-                handleSubmit(event);
               }}
             >
               prev
@@ -104,16 +109,17 @@ const Page = (): JSX.Element => {
             <button
               className="main__button_pagination"
               type="button"
-              disabled={page === 17 || isLoading}
-              onClick={(event) => {
+              disabled={page === maxPage || isLoading}
+              onClick={() => {
                 setPage(page + 1);
-                handleSubmit(event);
               }}
             >
               next
             </button>
           </div>
-          <div>{page} / 17</div>
+          <div>
+            {page} / {maxPage}
+          </div>
         </div>
       </div>
     </div>
