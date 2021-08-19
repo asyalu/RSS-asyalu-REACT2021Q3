@@ -1,9 +1,10 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Card = ({ article }): JSX.Element => {
-  const { author, title, publishedAt, content, url, urlToImage } = article;
+  const { author, title, publishedAt, content, urlToImage } = article;
 
   return (
     <div className="main__card">
@@ -12,7 +13,7 @@ const Card = ({ article }): JSX.Element => {
       <p className="main__card-item">{publishedAt}</p>
       <img className="main__card-img" src={urlToImage} alt={title} />
       <p className="main__card-item">{content}</p>
-      <a href={url}>Read more</a>
+      <Link to={`/details/${publishedAt}`}>Read more</Link>
     </div>
   );
 };

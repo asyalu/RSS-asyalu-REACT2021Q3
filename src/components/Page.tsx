@@ -1,10 +1,12 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Route } from 'react-router-dom';
 import shortid from 'shortid';
 import Card from './Card';
+import Details from './Details';
 
-const API_KEY = 'd633c6052102420fa0cf577e590ad411';
+const API_KEY = 'ce28e11caac3465882309f34a0bf3122';
 
 const Page = (): JSX.Element => {
   const [searchValue, setSearchValue] = useState('');
@@ -31,7 +33,7 @@ const Page = (): JSX.Element => {
   };
 
   useEffect(() => {
-    handleSubmit();
+    if (page !== 1) handleSubmit();
   }, [page]);
 
   return (
@@ -91,18 +93,17 @@ const Page = (): JSX.Element => {
         </label>
       </form>
       <div className="main__articles">
-        {articles.map((el) => (
-          <Card article={el} key={shortid()} />
-        ))}
+        {articles.map((el) => {
+          const key = shortid();
+          return <Card article={el} key={key} />;
+        })}
         <div className={articles.length ? 'main__pagination' : 'hidden'}>
           <div className="main__button-wrapper">
             <button
               className="main__button_pagination"
               type="button"
               disabled={page === 1 || isLoading}
-              onClick={() => {
-                setPage(page - 1);
-              }}
+              onClick={() => setPage(page - 1)}
             >
               prev
             </button>
@@ -110,9 +111,7 @@ const Page = (): JSX.Element => {
               className="main__button_pagination"
               type="button"
               disabled={page === maxPage || isLoading}
-              onClick={() => {
-                setPage(page + 1);
-              }}
+              onClick={() => setPage(page + 1)}
             >
               next
             </button>
