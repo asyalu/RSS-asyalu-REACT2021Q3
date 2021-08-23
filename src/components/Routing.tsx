@@ -1,5 +1,5 @@
 /* eslint-disable object-curly-newline */
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import About from './About';
@@ -20,6 +20,7 @@ const Routing = (): JSX.Element => {
     <main className="main">
       <TransitionGroup className="page">
         <Switch location={location}>
+          <Route path="/details/:id" render={() => <Details />} />
           {routes.map(({ path, Component }) => (
             <Route path={path} component={Component} key={path} exact>
               {({ match }) => (
@@ -34,9 +35,6 @@ const Routing = (): JSX.Element => {
               )}
             </Route>
           ))}
-          <Route path="/details/:id">
-            <Details />
-          </Route>
         </Switch>
       </TransitionGroup>
     </main>

@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 const Card = ({ article }): JSX.Element => {
   const { author, title, publishedAt, content, urlToImage } = article;
@@ -13,7 +13,7 @@ const Card = ({ article }): JSX.Element => {
       <p className="main__card-item">{publishedAt}</p>
       <img className="main__card-img" src={urlToImage} alt={title} />
       <p className="main__card-item">{content}</p>
-      <Link to={`/details/${publishedAt}`}>Read more</Link>
+      <Link to={`/details/${title}`}>Read more</Link>
     </div>
   );
 };

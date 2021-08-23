@@ -1,12 +1,9 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Route } from 'react-router-dom';
 import shortid from 'shortid';
+import API_KEY from '../API_KEY';
 import Card from './Card';
-import Details from './Details';
-
-const API_KEY = 'ce28e11caac3465882309f34a0bf3122';
 
 const Page = (): JSX.Element => {
   const [searchValue, setSearchValue] = useState('');
