@@ -14,6 +14,7 @@ const Articles = (): JSX.Element => {
     (state: RootState) => state.articles.arrArticles,
   );
   const isLoading = useSelector((state: RootState) => state.loading.loading);
+
   const maxPage = 17;
 
   return (
