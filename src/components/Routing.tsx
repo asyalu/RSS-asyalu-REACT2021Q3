@@ -5,10 +5,10 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import About from './About';
 import Details from './Details';
 import NotFoundPage from './NotFoundPage';
-import Page from './Page';
+import Main from './Main';
 
 const routes = [
-  { path: '/', name: 'Home', Component: Page },
+  { path: '/', name: 'Home', Component: Main },
   { path: '/about', name: 'About', Component: About },
   { path: '', name: 'PageNotFound', Component: NotFoundPage },
 ];

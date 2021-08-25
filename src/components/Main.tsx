@@ -1,37 +1,40 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import shortid from 'shortid';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/reducer/rootRreducer';
+import { addArticles, isLoading, goPage } from '../redux/actions';
 import API_KEY from '../API_KEY';
-import Card from './Card';
+import Articles from './Articles';
 
-const Page = (): JSX.Element => {
+const Main = (): JSX.Element => {
+  const loading = useSelector((state: RootState) => state.loading.loading);
+  const pageNum = useSelector((state: RootState) => state.page.page);
+
   const [searchValue, setSearchValue] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [articles, setArticles] = useState([]);
   const [sort, setSort] = useState('publishedAt');
   const [lang, setLang] = useState('en');
-  const [page, setPage] = useState(1);
-  const maxPage = 17;
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event?): Promise<void> => {
     if (event) event.preventDefault();
-    setIsLoading(true);
+    dispatch(isLoading(true));
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${searchValue}&sortBy=${sort}&page=${page}&language=${lang}&pageSize=6&apiKey=${API_KEY}`,
+        `https://newsapi.org/v2/everything?q=${searchValue}&sortBy=${sort}&page=${pageNum}&language=${lang}&pageSize=6&apiKey=${API_KEY}`,
       );
-      setArticles(response.data.articles);
+      dispatch(addArticles(response.data.articles));
     } catch (e) {
       console.error(e);
     } finally {
-      setIsLoading(false);
+      dispatch(isLoading(false));
     }
   };
 
   useEffect(() => {
-    if (page !== 1) handleSubmit();
-  }, [page]);
+    if (pageNum !== 1) handleSubmit();
+  }, [pageNum]);
 
   return (
     <div className="main__content">
@@ -48,8 +51,8 @@ const Page = (): JSX.Element => {
           <button
             className="main__button_search"
             type="submit"
-            disabled={isLoading}
-            onClick={() => setPage(1)}
+            disabled={loading}
+            onClick={() => dispatch(goPage(1))}
           >
             Search
           </button>
@@ -89,37 +92,9 @@ const Page = (): JSX.Element => {
           </select>
         </label>
       </form>
-      <div className="main__articles">
-        {articles.map((el) => {
-          const key = shortid();
-          return <Card article={el} key={key} />;
-        })}
-        <div className={articles.length ? 'main__pagination' : 'hidden'}>
-          <div className="main__button-wrapper">
-            <button
-              className="main__button_pagination"
-              type="button"
-              disabled={page === 1 || isLoading}
-              onClick={() => setPage(page - 1)}
-            >
-              prev
-            </button>
-            <button
-              className="main__button_pagination"
-              type="button"
-              disabled={page === maxPage || isLoading}
-              onClick={() => setPage(page + 1)}
-            >
-              next
-            </button>
-          </div>
-          <div>
-            {page} / {maxPage}
-          </div>
-        </div>
-      </div>
+      <Articles />
     </div>
   );
 };
 
-export default Page;
+export default Main;

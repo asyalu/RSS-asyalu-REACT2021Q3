@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Card = ({ article }): JSX.Element => {
   const { author, title, publishedAt, content, urlToImage } = article;
