@@ -14,6 +14,7 @@ const Main = (): JSX.Element => {
   const [searchValue, setSearchValue] = useState('');
   const [sort, setSort] = useState('publishedAt');
   const [lang, setLang] = useState('en');
+  const [error, setError] = useState('');
 
   const dispatch = useDispatch();
 
@@ -26,7 +27,7 @@ const Main = (): JSX.Element => {
       );
       dispatch(addArticles(response.data.articles));
     } catch (e) {
-      console.error(e);
+      setError(e);
     } finally {
       dispatch(isLoading(false));
     }
@@ -92,6 +93,7 @@ const Main = (): JSX.Element => {
           </select>
         </label>
       </form>
+      {error && <div>something went wrong ...</div>}
       <Articles />
     </div>
   );
