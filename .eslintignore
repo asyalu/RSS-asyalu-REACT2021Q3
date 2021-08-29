@@ -1,0 +1,5 @@
+*.css
+*.svg
+webpack.config.js
+jest.config.ts
+index.test.js
