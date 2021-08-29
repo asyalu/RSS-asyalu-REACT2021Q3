@@ -27,6 +27,8 @@ import Main from './src/components/Main';
 import Header from './src/components/Header';
 import Card from './src/components/Card';
 import Articles from './src/components/Articles';
+import DetailArticle from './src/components/DetailArticle';
+
 
 const renderWithRedux = (
   component,
@@ -144,3 +146,13 @@ describe('Main', () => {
     expect(screen.findByPlaceholderText('Search'));
   });
 });
+
+describe('DetailArticle', () => {
+  it('render DetailArticle', () => {
+    render(<DetailArticle article={article} />);
+    expect(screen.getByText(/authorName/i));
+    expect(screen.getByText(/title/i));
+    expect(screen.getByText(/any text/i));
+
+  })
+})
