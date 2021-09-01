@@ -2,8 +2,8 @@
   "name": "rss-asyalu-react2021q3",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack serve --mode development",
-    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "start": "nodemon dist/server/server.js",
+    "build": "webpack -w --config webpack.config.js --mode development",
     "dev": "cross-env NODE_ENV=development webpack --mode development"
   },
   "repository": {
@@ -21,6 +21,7 @@
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
+    "@types/cors": "^2.8.12",
     "@types/react": "^17.0.16",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
@@ -44,6 +45,8 @@
     "eslint-webpack-plugin": "^3.0.1",
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^2.2.0",
+    "nodemon": "^2.0.12",
+    "null-loader": "^4.0.1",
     "prettier": "2.3.2",
     "react-devtools": "^4.16.0",
     "sass-loader": "^12.1.0",
@@ -56,7 +59,10 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@types/react-router": "^5.1.16",
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
@@ -64,7 +70,8 @@
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.3.0",  
-    "shortid": "^2.2.16"
+    "redux-thunk": "^2.3.0",
+    "shortid": "^2.2.16",
+    "xmlhttprequest": "^1.8.0"
   }
 }

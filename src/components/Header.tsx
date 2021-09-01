@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { BrowserRouter, NavLink, Router } from 'react-router-dom';
+import Routing from './Routing';
 
 const Header = (): JSX.Element => (
   <header className="header">

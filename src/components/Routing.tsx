@@ -6,10 +6,12 @@ import About from './About';
 import Details from './Details';
 import NotFoundPage from './NotFoundPage';
 import Main from './Main';
+import { RouterSwitch } from '../client/routerSwitch'
 
-const routes = [
+export const routes = [
   { path: '/', name: 'Home', Component: Main },
   { path: '/about', name: 'About', Component: About },
+  { path: '/details/:id', name: 'Details', Component: Details },
   { path: '', name: 'PageNotFound', Component: NotFoundPage },
 ];
 
@@ -19,8 +21,7 @@ const Routing = (): JSX.Element => {
   return (
     <main className="main">
       <TransitionGroup className="page">
-        <Switch location={location}>
-          <Route path="/details/:id" render={() => <Details />} />
+        <RouterSwitch>
           {routes.map(({ path, Component }) => (
             <Route path={path} component={Component} key={path} exact>
               {({ match }) => (
@@ -35,7 +36,7 @@ const Routing = (): JSX.Element => {
               )}
             </Route>
           ))}
-        </Switch>
+        </RouterSwitch>
       </TransitionGroup>
     </main>
   );
